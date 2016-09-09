@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <title>Nginx vts statistics</title>
+    <meta name="description" content="Nginx vts statistics" />
+    <meta name="author" content="acrolink" />
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <link href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="bower_components/jquery-ui-month-picker/demo/MonthPicker.min.css" rel="stylesheet" type="text/css" />
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/jquery.maskedinput/dist/jquery.maskedinput.min.js"></script>
+    <script src="bower_components/jquery-ui-month-picker/demo/MonthPicker.min.js"></script>
+	<script src="js/filesize.min.js"></script>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="css/main.css?v=1.0" />
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+  </head>
+  <body ng-app="vtsWebapp" class="container-fluid">
+    <div ng-controller="HostsCtrl">
+      <label>From: <input id="start_month" type="text" name="start_month" ng-model="start_month" ng-change="getData(start_month, end_month)" ng-init="getData(start_month, end_month)" /></label><button class="btn btn-success clear">X</button>
+	  <label>To: <input id="end_month" type="text" name="end_month" ng-model="end_month" ng-change="getData(start_month, end_month)" /></label><button class="btn btn-success clear">X</button>
+	  <label>Filter: <input ng-model="searchText"></label>
+      <table class="data table-striped">
+	  
+	  <thead>
+	  <tr>
+		  <th>Host</th>
+		  <th>Month</th>
+		  <th>Traffic OUT</th>
+		  <th>Traffic IN</th>
+		  <th>Requests</th>
+		  </thead>
+	  </tr>
+	  <tbody>
+        <tr ng-repeat="host in hosts | filter:searchText" ng-class="rowClass(host)">
+          <td>{{ host.zone }}</td>
+          <td>{{ month_year(host.month) }}</td>
+          <td>{{ formatBytes(host.out) }}</td>
+		  <td>{{ formatBytes(host.in) }}</td>
+		  <td>{{ host.requests }}</td>
+		  
+        </tr>
+		  </tbody>
+      </table>
+    </div>
+  </body>
+</html>

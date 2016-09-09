@@ -1,0 +1,46 @@
+server {
+
+		server_name stats.domain.com 127.0.0.25;
+		
+		listen 80;
+		
+		allow 127.0.0.1;
+		allow 1.1.1.1; # Your IP at home or work..
+		deny all; # to restrict all other access to the data..
+		
+		root /../../nginx-vts-records/vtsWebapp;
+		
+		location / {
+			try_files $uri $uri/index.html;
+			}
+	
+
+        # pass the PHP scripts to FastCGI server listening on /var/run/php5-fpm.sock
+        location ~ \.php$ {
+                try_files $uri =404;
+                fastcgi_pass unix:/var/run/php5-fpm.sock;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+                
+				}
+	
+			location /status {
+	
+			# prevent resetting the counters from outside localhost
+			if ($args ~* (.*)(cmd=reset)(.*)){
+			 set $cond RESET;
+			}
+			
+			if ($remote_addr != '127.0.0.1'){
+			 set $cond "${cond}FOREIGN";
+			 }
+			
+			if ($cond = RESETFOREIGN) {
+				return 403;
+				}
+					
+            vhost_traffic_status_display;
+            vhost_traffic_status_display_format html;
+        }
+}

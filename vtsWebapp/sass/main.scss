@@ -1,0 +1,18 @@
+@import "../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+table.data {
+	width:90%;
+
+	tbody tr {
+		transition: all 139ms ease-in;
+
+		&:hover {
+			background-color:lightblue;
+			cursor:pointer;
+		}
+	}
+}
+
+button.clear {
+	margin: 0 10pt 0 2pt;
+}
