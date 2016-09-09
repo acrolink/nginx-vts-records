@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NginxStat", "NginxStat\NginxStat.csproj", "{F5FDF8D3-F0E7-4771-BB94-B7E0E8B8C02E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vtsReader", "vtsReader\vtsReader.csproj", "{F5FDF8D3-F0E7-4771-BB94-B7E0E8B8C02E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
